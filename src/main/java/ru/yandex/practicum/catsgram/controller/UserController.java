@@ -7,6 +7,7 @@ import ru.yandex.practicum.catsgram.model.User;
 import ru.yandex.practicum.catsgram.exception.UserAlreadyExistException;
 import ru.yandex.practicum.catsgram.service.UserService;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/users")
 @RestController
@@ -33,5 +34,10 @@ public class UserController {
     @PutMapping()
     public User update(@RequestBody User user) throws InvalidEmailException {
         return userService.update(user);
+    }
+
+    @GetMapping("/users/{userEmail}")
+    public Optional<User> findUserByEmail(@PathVariable String userEmail) {
+        return userService.findUserByEmail(userEmail);
     }
 }
